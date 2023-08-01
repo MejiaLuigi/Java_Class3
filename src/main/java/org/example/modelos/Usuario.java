@@ -1,11 +1,15 @@
 package org.example.modelos;
 
+import Validaciones.UsuarioValidacion;
+
 public class Usuario {
     private Integer id;
     private String documento;
     private String nombre;
     private String correo;
     private Integer ubicacion;
+
+    private UsuarioValidacion validacion = new UsuarioValidacion();
 
     public Usuario() {
     }
@@ -41,16 +45,22 @@ public class Usuario {
         return documento;
     }
 
-    public void setDocumento(String documento) {
-        this.documento = documento;
-    }
+    public void setDocumento(String documento) {this.documento = documento;}
 
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+
+        try {
+            this.validacion.validarNombre(nombre);
+            this.nombre = nombre;
+
+        }catch (Exception error){
+            System.out.println(error.getMessage());
+        }
+
     }
 
     public String getCorreo() {
